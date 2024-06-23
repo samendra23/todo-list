@@ -51,7 +51,7 @@ class TodosController extends Controller
 
         $todo->save();
 
-        return back()->with('success','Task added successfully');
+        return back()->with('success','Task Added Successfully');
     }
 
     /**
@@ -67,15 +67,33 @@ class TodosController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $todo = Todo::where('id', $id)->where('user_id', Auth::user()->id)->first();
+        return view('edit_task', compact('todo'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        $todo = Todo::where('id', $id)->where('user_id', Auth::user()->id)->firstOrFail();
+        $todo->title = $request->input('title');
+        $todo->description = $request->input('description');
+
+        if($request->has('status')){
+            $todo->status = true;
+        }else{
+            $todo->status = false;
+        }
+
+        $todo->save();
+
+        return back()->with('success', 'Task Updated Successfully');
     }
 
     /**
