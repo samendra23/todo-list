@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TodosController extends Controller
 {
@@ -15,7 +17,8 @@ class TodosController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $todos = Todo::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        return view('home', compact('todos'));
     }
 
     /**
@@ -23,7 +26,7 @@ class TodosController extends Controller
      */
     public function create()
     {
-        //
+        return view('add_task');
     }
 
     /**
@@ -31,7 +34,24 @@ class TodosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        $todo = new Todo;
+        $todo->title = $request->input('title');
+        $todo->description = $request->input('description');
+
+        if($request->has('status')){
+            $todo->status = true;
+        }
+
+        $todo->user_id = Auth::user()->id;
+
+        $todo->save();
+
+        return back()->with('success','Task added successfully');
     }
 
     /**
