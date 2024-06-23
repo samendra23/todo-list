@@ -51,7 +51,7 @@ class TodosController extends Controller
 
         $todo->save();
 
-        return back()->with('success','Task Added Successfully');
+        return redirect()->route('todo.index')->with('success','Task Added Successfully');
     }
 
     /**
@@ -59,7 +59,8 @@ class TodosController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $todo = Todo::where('id', $id)->where('user_id', Auth::user()->id)->firstOrFail();
+        return view('delete_task', compact('todo'));
     }
 
     /**
@@ -93,7 +94,7 @@ class TodosController extends Controller
 
         $todo->save();
 
-        return back()->with('success', 'Task Updated Successfully');
+        return redirect()->route('todo.index')->with('success', 'Task Updated Successfully');
     }
 
     /**
@@ -101,6 +102,8 @@ class TodosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $todo = Todo::where('id', $id)->where('user_id', Auth::user()->id)->firstOrFail();
+        $todo->delete();
+        return redirect()->route('todo.index')->with('success', 'Task Deleted Successfully');
     }
 }
