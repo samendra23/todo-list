@@ -51,7 +51,7 @@ class TodosController extends Controller
 
         $todo->save();
 
-        return redirect()->route('todo.index')->with('success','Task Added Successfully');
+        return back()->with('success','Task Added Successfully');
     }
 
     /**
@@ -94,7 +94,7 @@ class TodosController extends Controller
 
         $todo->save();
 
-        return redirect()->route('todo.index')->with('success', 'Task Updated Successfully');
+        return back()->with('success', 'Task Updated Successfully');
     }
 
     /**

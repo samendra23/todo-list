@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        Delete {{ $todo->title }}
+                        Delete "{{ $todo->title }}"
                     </div>
                     <h5 class="card-header">
                         <a href="{{ route('todo.index') }}" class="btn btn-sm btn-outline-primary"><i

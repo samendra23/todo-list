@@ -36,7 +36,7 @@
                         @method('PUT')
 
                         <div class="form-group row">
-                            <label for="title" class="col-form-label text-md-right">Title</label>
+                            <label for="title" class="col-form-label">Title</label>
 
                                 <input id="title" type="title" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $todo->title }}" required autocomplete="title" autofocus>
 
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="description" class="col-form-label text-md-right">Description</label>
+                            <label for="description" class="col-form-label">Description</label>
 
                                 <textarea name="description" id="description" cols="30" rows="10" class="form-control @error('password') is-invalid @enderror" autocomplete="description" value="{{ $todo->description }}">{{ $todo->description }}</textarea>
 
