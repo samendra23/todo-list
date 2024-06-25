@@ -12,6 +12,7 @@ class TodosController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -35,8 +36,8 @@ class TodosController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'description' => 'nullable',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
         $todo = new Todo;
@@ -78,8 +79,8 @@ class TodosController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'description' => 'nullable',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
         $todo = Todo::where('id', $id)->where('user_id', Auth::user()->id)->firstOrFail();
@@ -105,5 +106,17 @@ class TodosController extends Controller
         $todo = Todo::where('id', $id)->where('user_id', Auth::user()->id)->firstOrFail();
         $todo->delete();
         return redirect()->route('todo.index')->with('success', 'Task Deleted Successfully');
+    }
+
+    /**
+     * Toggle the status of the specified resource.
+     */
+    public function toggleStatus($id)
+    {
+        $todo = Todo::where('id', $id)->where('user_id', Auth::user()->id)->firstOrFail();
+        $todo->status = !$todo->status;
+        $todo->save();
+
+        return redirect()->route('home')->with('status', 'Task status updated!');
     }
 }
