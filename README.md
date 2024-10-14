@@ -14,44 +14,47 @@ This is a simple ToDo application built using Laravel Blade templating engine, L
 - PHP >= 7.4
 - Composer
 - Node.js & NPM
-- MySQL or SQLite (for database)
+- MySQL or SQLite (for database) [can be done using XAMPP or what you prefer]
 
 ## Installation
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/todo-laravel.git
-2. Navigate into the project directory:
-   ```bash
-   cd todo-laravel-app
-3. Install PHP dependencies using Composer:
+2. Install PHP dependencies using Composer:
    ```bash
    composer install
-4. Install JavaScript dependencies using NPM:
+3. Install JavaScript dependencies using NPM:
    ```bash
    npm install
-5. Compile frontend assets (CSS and JavaScript):
+4. Compile frontend assets (CSS and JavaScript):
    ```bash
    npm run dev
-6. Set up the .env file by copying .env.example:
+5. Set up the .env file by copying .env.example:
    ```bash
    cp .env.example .env
-7. Configure your database settings in the .env file:
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=your_database_name
-DB_USERNAME=your_database_username
-DB_PASSWORD=your_database_password
-8. Run the migrations to create the necessary database tables:
+6. Configure your database settings in the .env file:
+   ```bash
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=your_database_name
+   DB_USERNAME=your_database_username
+   DB_PASSWORD=your_database_password
+
+7. Run the migrations to create the necessary database tables:
    ```bash
    php artisan migrate
-9. Generate the application key:
+8. Generate the application key:
    ```bash
    php artisan key:generate
-10. Start the Laravel development server:
-   ```bash
-   php artisan serve
-11. Access the application in your web browser at:
-   ```bash
-   http://localhost:8000
+9. Start the server:
+    ```bash
+    php artisan serve
+10. Access the application in your web browser at:
+    ```bash
+    http://localhost:8000
+10. xyz
+    ```bash
+    http://localhost:8000
+11. xyz
